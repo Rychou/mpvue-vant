@@ -11,8 +11,10 @@ npm run dev
 
 # 3.打开微信开发者工具，新建项目，选择dist目录，appid用测试的就行，项目名自己起
 
-# 4.示例演示了Button组件和Notify组件的使用方式。请对照[Vant 文档](https://youzan.github.io/vant-weapp/#/notify)理解。
 ```
+# 说明
+
+示例演示了Button组件和Notify组件的使用方式。请对照[Vant文档](https://youzan.github.io/vant-weapp/#/notify)进行理解。
 
 ## 示例图
 

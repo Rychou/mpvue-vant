@@ -5,6 +5,7 @@
 
 此教程是在[dov-yih](https://github.com/dov-yih)一同协助下完成。经过测试，[Vant Weapp](https://youzan.github.io/vant-weapp/#/intro)下所有组件都能够在`mpvue`中使用
 
+[demo地址](./demo)
 
 # 使用方法
 
