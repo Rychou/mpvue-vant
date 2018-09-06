@@ -152,5 +152,14 @@ export {
 }
 ```
 
+# 3. 其他组件库
 
+目前比较好的组件库有三个，[Wux Weapp](https://wux-weapp.github.io/wux-weapp/#/),[iview weapp](https://weapp.iviewui.com/),[Vant Weapp](https://youzan.github.io/vant-weapp/#/intro)。
 
+这三者都是用原生小程序写的组件库，因此理论上来说，在mpvue中都是可以无缝使用的。不同组件库的组件都不一样，有的更丰富，有的逻辑更完善，有的文档更清晰。因此用什么组件，还需要自己取舍。
+
+比如：三者中，唯有[Wux Weapp](https://wux-weapp.github.io/wux-weapp/#/)有日历组件，而且它里面还有一些更高级的组件可以使用。
+
+使用方法上，几乎没有差异。值得注意的是，大家复制源代码到自己项目上时，应该复制`/dist/`目录下的文件。因为这里是经过编译后的。
+
+如果大家使用过程中遇到什么BUG，可以通过提[issues](https://github.com/xxxsimons/mpvue-vant/issues)的方式让我知道，大家一起踩坑吧！
