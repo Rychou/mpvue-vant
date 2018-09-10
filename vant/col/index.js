@@ -1,19 +1,13 @@
-const ROW_PATH = '../row/index';
+import { create } from '../common/create';
 
-Component({
-  options: {
-    addGlobalClass: true
-  },
-
-  externalClasses: ['custom-class'],
-
+create({
   relations: {
-    [ROW_PATH]: {
+    '../row/index': {
       type: 'ancestor'
     }
   },
 
-  properties: {
+  props: {
     span: Number,
     offset: Number
   },
@@ -22,7 +16,9 @@ Component({
     setGutter(gutter) {
       const padding = `${gutter / 2}px`;
       const style = gutter ? `padding-left: ${padding}; padding-right: ${padding};` : '';
-      this.setData({ style });
+      if (style !== this.data.style) {
+        this.setData({ style });
+      }
     }
   }
 });

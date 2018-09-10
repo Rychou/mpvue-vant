@@ -1,13 +1,7 @@
-const ITEM_PATH = '../tabbar-item/index';
+import { create } from '../common/create';
 
-Component({
-  options: {
-    addGlobalClass: true
-  },
-
-  externalClasses: ['custom-class'],
-
-  properties: {
+create({
+  props: {
     active: {
       type: Number,
       observer(active) {
@@ -35,17 +29,21 @@ Component({
   },
 
   relations: {
-    [ITEM_PATH]: {
+    '../tabbar-item/index': {
       type: 'descendant',
 
       linked(target) {
         this.data.items.push(target);
-        this.setActiveItem();
+        setTimeout(() => {
+          this.setActiveItem();
+        });
       },
 
       unlinked(target) {
         this.data.items = this.data.items.filter(item => item !== target);
-        this.setActiveItem();
+        setTimeout(() => {
+          this.setActiveItem();
+        });
       }
     }
   },
@@ -53,7 +51,7 @@ Component({
   methods: {
     setActiveItem() {
       this.data.items.forEach((item, index) => {
-        item.setData({
+        item.setActive({
           active: index === this.data.currentActive,
           count: this.data.items.length
         });
@@ -63,7 +61,7 @@ Component({
     onChange(child) {
       const active = this.data.items.indexOf(child);
       if (active !== this.data.currentActive && active !== -1) {
-        this.triggerEvent('change', active);
+        this.$emit('change', active);
         this.setData({ currentActive: active });
         this.setActiveItem();
       }
