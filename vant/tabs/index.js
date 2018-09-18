@@ -39,7 +39,7 @@ create({
       observer: 'setLine'
     },
     active: {
-      type: null,
+      type: Number,
       value: 0
     },
     type: {
