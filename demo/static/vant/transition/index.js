@@ -1,62 +1,13 @@
-Component({
-  options: {
-    addGlobalClass: true
-  },
+import { create } from '../common/create';
+import { transition } from '../mixins/transition';
 
-  externalClasses: ['custom-class'],
+create({
+  mixins: [transition(true)],
 
-  properties: {
-    customStyle: String,
-    show: {
-      value: true,
-      type: Boolean,
-      observer(value) {
-        if (value) {
-          this.show();
-        } else {
-          this.setData({
-            type: 'leave'
-          });
-        }
-      }
-    },
+  props: {
     name: {
       type: String,
       value: 'fade'
-    },
-    duration: {
-      type: Number,
-      value: 300
-    }
-  },
-
-  data: {
-    type: '',
-    inited: false,
-    display: false
-  },
-
-  attached() {
-    if (this.data.show) {
-      this.show();
-    }
-  },
-
-  methods: {
-    show() {
-      this.setData({
-        inited: true,
-        display: true,
-        type: 'enter'
-      });
-    },
-
-    onAnimationEnd() {
-      if (!this.data.show) {
-        this.setData({
-          display: false
-        });
-      }
     }
   }
 });

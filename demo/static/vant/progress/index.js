@@ -1,13 +1,7 @@
-Component({
-  options: {
-    addGlobalClass: true
-  },
+import { create } from '../common/create';
 
-  externalClasses: [
-    'custom-class'
-  ],
-
-  properties: {
+create({
+  props: {
     inactive: {
       type: Boolean,
       observer() {
@@ -91,25 +85,15 @@ Component({
       });
     },
 
-    getRect(selector, callback) {
-      wx.createSelectorQuery()
-        .in(this)
-        .select(selector)
-        .boundingClientRect(rect => {
-          rect && callback(rect);
-        })
-        .exec();
-    },
-
     getWidth() {
-      this.getRect('.van-progress', rect => {
+      this.getRect('.van-progress').then(rect => {
         this.setData({
           progressWidth: rect.width
         });
         this.setPortionStyle();
       });
 
-      this.getRect('.van-progress__pivot', rect => {
+      this.getRect('.van-progress__pivot').then(rect => {
         this.setData({
           pivotWidth: rect.width || 0
         });

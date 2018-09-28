@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "Button 按钮",
+  "usingComponents": {
+    "van-button": "/static/vant/button/index",
+    "van-panel": "/static/vant/panel/index"
+  }
+}

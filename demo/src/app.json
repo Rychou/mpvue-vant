@@ -1,6 +1,8 @@
 {
   "pages": [
-    "pages/index/main"
+    "pages/dashboard/main",
+    "pages/button/main",
+    "pages/area/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

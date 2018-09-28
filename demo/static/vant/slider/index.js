@@ -1,15 +1,10 @@
-const touchBehaviors = require('../behaviors/touch');
+import { create } from '../common/create';
+import { touch } from '../mixins/touch';
 
-Component({
-  options: {
-    addGlobalClass: true
-  },
+create({
+  mixins: [touch],
 
-  externalClasses: ['custom-class'],
-
-  behaviors: [touchBehaviors],
-
-  properties: {
+  props: {
     disabled: Boolean,
     max: {
       type: Number,
@@ -38,14 +33,6 @@ Component({
   },
 
   methods: {
-    getRect(callback) {
-      wx.createSelectorQuery()
-        .in(this)
-        .select('.van-slider')
-        .boundingClientRect(callback)
-        .exec();
-    },
-
     onTouchStart(event) {
       if (this.data.disabled) return;
 
@@ -57,7 +44,7 @@ Component({
       if (this.data.disabled) return;
 
       this.touchMove(event);
-      this.getRect(rect => {
+      this.getRect('.van-slider').then(rect => {
         const diff = this.deltaX / rect.width * 100;
         this.updateValue(this.startValue + diff);
       });
@@ -86,16 +73,12 @@ Component({
       });
 
       if (end) {
-        this.triggerEvent('change', value);
+        this.$emit('change', value);
       }
     },
 
     format(value) {
-      const {
-        max,
-        min,
-        step
-      } = this.data;
+      const { max, min, step } = this.data;
       return Math.round(Math.max(min, Math.min(value, max)) / step) * step;
     }
   }
