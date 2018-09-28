@@ -1,50 +1,31 @@
-const buttonBehaviors = require('../behaviors/button');
-const classnames = require('../common/classnames');
+import { create } from '../common/create';
+import { classNames } from '../common/class-names';
+import { button } from '../mixins/button';
 
-const observer = function () {
-  this.setClasses();
+const booleanProp = {
+  type: Boolean,
+  observer: 'setClasses'
 };
 
-Component({
-  options: {
-    addGlobalClass: true
-  },
+create({
+  mixins: [button],
 
-  externalClasses: ['custom-class', 'loading-class'],
-
-  behaviors: [buttonBehaviors],
-
-  properties: {
+  props: {
     type: {
       type: String,
       value: 'default',
-      observer
+      observer: 'setClasses'
     },
     size: {
       type: String,
       value: 'normal',
-      observer
+      observer: 'setClasses'
     },
-    plain: {
-      type: Boolean,
-      observer
-    },
-    disabled: {
-      type: Boolean,
-      observer
-    },
-    loading: {
-      type: Boolean,
-      observer
-    },
-    block: {
-      type: Boolean,
-      observer
-    },
-    square: {
-      type: Boolean,
-      observer
-    }
+    plain: booleanProp,
+    block: booleanProp,
+    square: booleanProp,
+    loading: booleanProp,
+    disabled: booleanProp
   },
 
   attached() {
@@ -54,22 +35,14 @@ Component({
   methods: {
     onClick() {
       if (!this.data.disabled && !this.data.loading) {
-        this.triggerEvent('click');
+        this.$emit('click');
       }
     },
 
     setClasses() {
-      const {
-        type,
-        size,
-        plain,
-        disabled,
-        loading,
-        square,
-        block
-      } = this.data;
+      const { type, size, plain, disabled, loading, square, block } = this.data;
       this.setData({
-        classes: classnames(`van-button--${type}`, `van-button--${size}`, {
+        classes: classNames(`van-button--${type}`, `van-button--${size}`, {
           'van-button--block': block,
           'van-button--plain': plain,
           'van-button--square': square,
