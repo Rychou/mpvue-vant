@@ -1,7 +1,6 @@
-export const button = Behavior({
+export var button = Behavior({
   properties: {
-    loading: Boolean,
-    openType: String,
+    id: String,
     appParameter: String,
     sendMessageTitle: String,
     sendMessagePath: String,
@@ -23,28 +22,6 @@ export const button = Behavior({
     sessionFrom: {
       type: String,
       value: ''
-    }
-  },
-
-  methods: {
-    bindgetuserinfo(event = {}) {
-      this.$emit('getuserinfo', event.detail);
-    },
-
-    bindcontact(event = {}) {
-      this.$emit('contact', event.detail);
-    },
-
-    bindgetphonenumber(event = {}) {
-      this.$emit('getphonenumber', event.detail);
-    },
-
-    bindopensetting(event = {}) {
-      this.$emit('opensetting', event.detail);
-    },
-
-    binderror(event = {}) {
-      this.$emit('error', event.detail);
     }
   }
 });

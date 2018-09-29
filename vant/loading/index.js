@@ -1,6 +1,5 @@
-import { create } from '../common/create';
-
-create({
+import { VantComponent } from '../common/component';
+VantComponent({
   props: {
     size: {
       type: String,

@@ -1,14 +1,6 @@
-import { create } from '../common/create';
-
-create({
-  classes: [
-    'thumb-class',
-    'title-class',
-    'price-class',
-    'desc-class',
-    'num-class'
-  ],
-
+import { VantComponent } from '../common/component';
+VantComponent({
+  classes: ['thumb-class', 'title-class', 'price-class', 'desc-class', 'num-class'],
   props: {
     num: String,
     desc: String,

@@ -1,21 +1,24 @@
 import { isObj } from '../common/utils';
-
-const defaultOptions = {
+var defaultOptions = {
   selector: '#van-notify',
   duration: 3000
 };
 
 function parseOptions(text) {
-  return isObj(text) ? text : { text };
+  return isObj(text) ? text : {
+    text: text
+  };
 }
 
-export default function Notify(options = {}) {
-  const pages = getCurrentPages();
-  const ctx = pages[pages.length - 1];
+export default function Notify(options) {
+  if (options === void 0) {
+    options = {};
+  }
 
+  var pages = getCurrentPages();
+  var ctx = pages[pages.length - 1];
   options = Object.assign({}, defaultOptions, parseOptions(options));
-
-  const el = ctx.selectComponent(options.selector);
+  var el = ctx.selectComponent(options.selector);
   delete options.selector;
 
   if (el) {

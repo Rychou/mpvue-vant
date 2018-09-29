@@ -1,6 +1,5 @@
-import { create } from '../common/create';
-
-create({
+import { VantComponent } from '../common/component';
+VantComponent({
   props: {
     info: null,
     name: String,
@@ -11,9 +10,8 @@ create({
       value: 'van-icon'
     }
   },
-
   methods: {
-    onClick() {
+    onClick: function onClick() {
       this.$emit('click');
     }
   }

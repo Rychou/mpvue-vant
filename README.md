@@ -122,7 +122,7 @@ onChange(event){ // 获取表单组件filed的值
 }
 ```
 
-## 2. BUG 及处理方法
+## 2. BUG 及报错处理方法
 
 ### 2.1 监听名
 
@@ -144,33 +144,13 @@ this.$emit('clickIcon');
 
 ### 2.2 报错
 
-我在迁移过程中遇到如下报错信息
+#### 2.2.1 引入组件报错
 
 ```
-Cannot assign to read only property 'exports' of object '#<Object>' (mix require and export
+VM54:1 thirdScriptError sdk uncaught third Error module "static/vant/notify/index.js" is not defined
 ```
 
-这是`module.export`和`import`混用的原因导致的。解决办法就是修改`module.export`为`export`
-
-eg:
-
-```
-// static/vant/utils/index.js 10行
-
-modules.export = {
-  isObj,
-  isDef
-}
-
-// 修改为
-
-export {
-  isObj,
-  isDef
-}
-```
-
-> 最新的`vant weapp`组件库已经修复了`export`这个问题。 大家也可以直接拉去`vant weapp`的最新代码了，目前暂时只发现了有上面说的监听名的 BUG，大家用我给的解决方案修改一下源代码就可以了。同时本仓库也会同步更新最新的`vant weapp`组件库。
+解决办法是：打开小程序开发者工具中的**ES6 转 ES5**功能. [issues/#5](https://github.com/xxxsimons/mpvue-vant/issues/5#issuecomment-419620351)
 
 # 3. 其他组件库
 

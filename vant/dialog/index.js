@@ -1,25 +1,18 @@
-import { create } from '../common/create';
-
-create({
+import { VantComponent } from '../common/component';
+import { openType } from '../mixins/open-type';
+VantComponent({
+  mixins: [openType],
   props: {
+    show: Boolean,
     title: String,
     message: String,
     useSlot: Boolean,
     asyncClose: Boolean,
     showCancelButton: Boolean,
     confirmButtonOpenType: String,
-    show: {
-      type: Boolean,
-      observer(show) {
-        if (!show) {
-          this.setData({
-            loading: {
-              confirm: false,
-              cancel: false
-            }
-          });
-        }
-      }
+    zIndex: {
+      type: Number,
+      value: 100
     },
     confirmButtonText: {
       type: String,
@@ -42,43 +35,60 @@ create({
       value: false
     }
   },
-
   data: {
     loading: {
       confirm: false,
       cancel: false
     }
   },
-
+  watch: {
+    show: function show(_show) {
+      if (!_show) {
+        this.setData({
+          loading: {
+            confirm: false,
+            cancel: false
+          }
+        });
+      }
+    }
+  },
   methods: {
-    onConfirm() {
+    onConfirm: function onConfirm() {
       this.handleAction('confirm');
     },
-
-    onCancel() {
+    onCancel: function onCancel() {
       this.handleAction('cancel');
     },
-
-    onClickOverlay() {
+    onClickOverlay: function onClickOverlay() {
       this.onClose('overlay');
     },
-
-    handleAction(action) {
+    handleAction: function handleAction(action) {
       if (this.data.asyncClose) {
         this.setData({
-          [`loading.${action}`]: true
+          ["loading." + action]: true
         });
       }
 
       this.onClose(action);
     },
-
-    onClose(action) {
+    close: function close() {
+      this.setData({
+        show: false
+      });
+    },
+    onClose: function onClose(action) {
       if (!this.data.asyncClose) {
-        this.setData({ show: false });
+        this.close();
       }
+
       this.$emit('close', action);
       this.$emit(action);
+      var callback = this.data[action === 'confirm' ? 'onConfirm' : 'onCancel'];
+
+      if (callback) {
+        callback(this);
+      }
     }
   }
 });

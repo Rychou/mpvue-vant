@@ -1,6 +1,7 @@
 <van-popup
   show="{{ show }}"
   transition="scale"
+  z-index="{{ zIndex }}"
   overlay="{{ overlay }}"
   close-on-click-overlay="{{ closeOnClickOverlay }}"
   custom-class="van-dialog"
@@ -36,6 +37,11 @@
         custom-class="van-dialog__confirm"
         open-type="{{ confirmButtonOpenType }}"
         bind:click="onConfirm"
+        bindcontact="bindContact"
+        bindgetuserinfo="bindGetUserInfo"
+        bindgetphonenumber="bindGetPhoneNumber"
+        binderror="bindError"
+        bindopensetting="bindOpenSetting"
       >
         {{ confirmButtonText }}
       </van-button>

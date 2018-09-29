@@ -1,23 +1,22 @@
-const hasOwn = {}.hasOwnProperty;
-
+var hasOwn = {}.hasOwnProperty;
 export function classNames() {
-  const classes = [];
+  var classes = [];
 
-  for (let i = 0; i < arguments.length; i++) {
-    const arg = arguments[i];
+  for (var i = 0; i < arguments.length; i++) {
+    var arg = arguments[i];
     if (!arg) continue;
-
-    const argType = typeof arg;
+    var argType = typeof arg;
 
     if (argType === 'string' || argType === 'number') {
       classes.push(arg);
     } else if (Array.isArray(arg) && arg.length) {
-      const inner = classNames.apply(null, arg);
+      var inner = classNames.apply(null, arg);
+
       if (inner) {
         classes.push(inner);
       }
     } else if (argType === 'object') {
-      for (const key in arg) {
+      for (var key in arg) {
         if (hasOwn.call(arg, key) && arg[key]) {
           classes.push(key);
         }
@@ -26,4 +25,5 @@ export function classNames() {
   }
 
   return classes.join(' ');
-};
+}
+;

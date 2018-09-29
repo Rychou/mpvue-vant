@@ -1,50 +1,40 @@
-import { create } from '../common/create';
-
-create({
-  relations: {
-    '../tab/index': {
-      type: 'descendant',
-
-      linked(target) {
-        const { tabs } = this.data;
-        tabs.push({
-          instance: target,
-          data: target.data
-        });
-        this.setData({
-          tabs,
-          scrollable: tabs.length > this.data.swipeThreshold
-        });
-        this.setActiveTab();
-      },
-
-      unlinked(target) {
-        const tabs = this.data.tabs.filter(item => item.instance !== target);
-        this.setData({
-          tabs,
-          scrollable: tabs.length > this.data.swipeThreshold
-        });
-        this.setActiveTab();
-      }
+import { VantComponent } from '../common/component';
+VantComponent({
+  relation: {
+    name: 'tab',
+    type: 'descendant',
+    linked: function linked(child) {
+      this.data.tabs.push({
+        instance: child,
+        data: child.data
+      });
+      this.updateTabs();
+    },
+    unlinked: function unlinked(child) {
+      var tabs = this.data.tabs.filter(function (item) {
+        return item.instance !== child;
+      });
+      this.setData({
+        tabs: tabs,
+        scrollable: tabs.length > this.data.swipeThreshold
+      });
+      this.setActiveTab();
     }
   },
-
   props: {
-    color: {
-      type: String,
-      observer: 'setLine'
-    },
-    lineWidth: {
-      type: Number,
-      observer: 'setLine'
-    },
+    color: String,
+    lineWidth: Number,
     active: {
-      type: null,
+      type: Number,
       value: 0
     },
     type: {
       type: String,
       value: 'line'
+    },
+    border: {
+      type: Boolean,
+      value: true
     },
     duration: {
       type: Number,
@@ -52,36 +42,47 @@ create({
     },
     swipeThreshold: {
       type: Number,
-      value: 4,
-      observer() {
-        this.setData({
-          scrollable: this.data.tabs.length > this.data.swipeThreshold
-        });
-      }
+      value: 4
     }
   },
-
   data: {
     tabs: [],
     lineStyle: '',
-    scrollLeft: 0
+    scrollLeft: 0,
+    scrollable: false
   },
-
-  ready() {
+  watch: {
+    swipeThreshold: function swipeThreshold() {
+      this.setData({
+        scrollable: this.data.tabs.length > this.data.swipeThreshold
+      });
+    },
+    color: 'setLine',
+    lineWidth: 'setLine',
+    active: 'setActiveTab'
+  },
+  mounted: function mounted() {
     this.setLine();
     this.scrollIntoView();
   },
-
   methods: {
-    trigger(eventName, index) {
+    updateTabs: function updateTabs() {
+      var tabs = this.data.tabs;
+      this.setData({
+        tabs: tabs,
+        scrollable: tabs.length > this.data.swipeThreshold
+      });
+      this.setActiveTab();
+    },
+    trigger: function trigger(eventName, index) {
       this.$emit(eventName, {
-        index,
+        index: index,
         title: this.data.tabs[index].data.title
       });
     },
+    onTap: function onTap(event) {
+      var index = event.currentTarget.dataset.index;
 
-    onTap(event) {
-      const { index } = event.currentTarget.dataset;
       if (this.data.tabs[index].data.disabled) {
         this.trigger('disabled', index);
       } else {
@@ -89,45 +90,41 @@ create({
         this.setActive(index);
       }
     },
-
-    setActive(active) {
+    setActive: function setActive(active) {
       if (active !== this.data.active) {
         this.trigger('change', active);
-        this.setData({ active });
+        this.setData({
+          active: active
+        });
         this.setActiveTab();
-        this.setLine();
-        this.scrollIntoView();
       }
     },
+    setLine: function setLine() {
+      var _this = this;
 
-    setLine() {
       if (this.data.type !== 'line') {
         return;
       }
 
-      this.getRect('.van-tab', true).then(rects => {
-        const rect = rects[this.data.active];
-        const width = this.data.lineWidth || rect.width;
-        let left = rects
-          .slice(0, this.data.active)
-          .reduce((prev, curr) => prev + curr.width, 0);
+      this.getRect('.van-tab', true).then(function (rects) {
+        var rect = rects[_this.data.active];
+        var width = _this.data.lineWidth || rect.width;
+        var left = rects.slice(0, _this.data.active).reduce(function (prev, curr) {
+          return prev + curr.width;
+        }, 0);
         left += (rect.width - width) / 2;
 
-        this.setData({
-          lineStyle: `
-            width: ${width}px;
-            background-color: ${this.data.color};
-            transform: translateX(${left}px);
-            transition-duration: ${this.data.duration}s;
-          `
+        _this.setData({
+          lineStyle: "\n            width: " + width + "px;\n            background-color: " + _this.data.color + ";\n            transform: translateX(" + left + "px);\n            transition-duration: " + _this.data.duration + "s;\n          "
         });
       });
     },
+    setActiveTab: function setActiveTab() {
+      var _this2 = this;
 
-    setActiveTab() {
-      this.data.tabs.forEach((item, index) => {
-        const data = {
-          active: index === this.data.active
+      this.data.tabs.forEach(function (item, index) {
+        var data = {
+          active: index === _this2.data.active
         };
 
         if (data.active) {
@@ -138,24 +135,28 @@ create({
           item.instance.setData(data);
         }
       });
+      this.setLine();
+      this.scrollIntoView();
     },
-
     // scroll active tab into view
-    scrollIntoView(immediate) {
+    scrollIntoView: function scrollIntoView() {
+      var _this3 = this;
+
       if (!this.data.scrollable) {
         return;
       }
 
-      this.getRect('.van-tab', true).then(tabRects => {
-        const tabRect = tabRects[this.data.active];
-        const offsetLeft = tabRects
-          .slice(0, this.data.active)
-          .reduce((prev, curr) => prev + curr.width, 0);
-        const tabWidth = tabRect.width;
+      this.getRect('.van-tab', true).then(function (tabRects) {
+        var tabRect = tabRects[_this3.data.active];
+        var offsetLeft = tabRects.slice(0, _this3.data.active).reduce(function (prev, curr) {
+          return prev + curr.width;
+        }, 0);
+        var tabWidth = tabRect.width;
 
-        this.getRect('.van-tabs__nav').then(navRect => {
-          const navWidth = navRect.width;
-          this.setData({
+        _this3.getRect('.van-tabs__nav').then(function (navRect) {
+          var navWidth = navRect.width;
+
+          _this3.setData({
             scrollLeft: offsetLeft - (navWidth - tabWidth) / 2
           });
         });

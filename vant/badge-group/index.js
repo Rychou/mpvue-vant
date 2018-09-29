@@ -1,42 +1,36 @@
-import { create } from '../common/create';
-
-create({
-  relations: {
-    '../badge/index': {
-      type: 'descendant',
-
-      linked(target) {
-        this.data.badges.push(target);
-        this.setActive();
-      },
-
-      unlinked(target) {
-        this.data.badges = this.data.badges.filter(item => item !== target);
-        this.setActive();
-      }
+import { VantComponent } from '../common/component';
+VantComponent({
+  relation: {
+    name: 'badge',
+    type: 'descendant',
+    linked: function linked(target) {
+      this.badges.push(target);
+      this.setActive();
+    },
+    unlinked: function unlinked(target) {
+      this.badges = this.badges.filter(function (item) {
+        return item !== target;
+      });
+      this.setActive();
     }
   },
-
   props: {
     active: {
       type: Number,
-      value: 0,
-      observer: 'setActive'
+      value: 0
     }
   },
-
-  data: {
-    badges: []
+  watch: {
+    active: 'setActive'
   },
-
-  attached() {
+  beforeCreate: function beforeCreate() {
+    this.badges = [];
     this.currentActive = -1;
   },
-
   methods: {
-    setActive(badge) {
-      let { active } = this.data;
-      const { badges } = this.data;
+    setActive: function setActive(badge) {
+      var active = this.data.active;
+      var badges = this.badges;
 
       if (badge) {
         active = badges.indexOf(badge);
@@ -46,13 +40,15 @@ create({
         return;
       }
 
-      if (this.currentActive !== -1) {
+      if (this.currentActive !== -1 && badges[this.currentActive]) {
         this.$emit('change', active);
         badges[this.currentActive].setActive(false);
       }
 
-      badges[active].setActive(true);
-      this.currentActive = active;
+      if (badges[active]) {
+        badges[active].setActive(true);
+        this.currentActive = active;
+      }
     }
   }
 });

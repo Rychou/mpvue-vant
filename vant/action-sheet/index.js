@@ -1,10 +1,13 @@
-import { create } from '../common/create';
-
-create({
+import { VantComponent } from '../common/component';
+VantComponent({
   props: {
     show: Boolean,
     title: String,
     cancelText: String,
+    zIndex: {
+      type: Number,
+      value: 100
+    },
     actions: {
       type: Array,
       value: []
@@ -18,21 +21,19 @@ create({
       value: true
     }
   },
-
   methods: {
-    onSelect(event) {
-      const { index } = event.currentTarget.dataset;
-      const item = this.data.actions[index];
+    onSelect: function onSelect(event) {
+      var index = event.currentTarget.dataset.index;
+      var item = this.data.actions[index];
+
       if (item && !item.disabled && !item.loading) {
         this.$emit('select', item);
       }
     },
-
-    onCancel() {
+    onCancel: function onCancel() {
       this.$emit('cancel');
     },
-
-    onClose() {
+    onClose: function onClose() {
       this.$emit('close');
     }
   }

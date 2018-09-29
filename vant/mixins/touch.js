@@ -1,6 +1,6 @@
-export const touch = Behavior({
+export var touch = Behavior({
   methods: {
-    touchStart(event) {
+    touchStart: function touchStart(event) {
       this.direction = '';
       this.deltaX = 0;
       this.deltaY = 0;
@@ -9,9 +9,8 @@ export const touch = Behavior({
       this.startX = event.touches[0].clientX;
       this.startY = event.touches[0].clientY;
     },
-
-    touchMove(event) {
-      const touch = event.touches[0];
+    touchMove: function touchMove(event) {
+      var touch = event.touches[0];
       this.deltaX = touch.clientX - this.startX;
       this.deltaY = touch.clientY - this.startY;
       this.offsetX = Math.abs(this.deltaX);

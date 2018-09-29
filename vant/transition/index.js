@@ -1,9 +1,7 @@
-import { create } from '../common/create';
+import { VantComponent } from '../common/component';
 import { transition } from '../mixins/transition';
-
-create({
+VantComponent({
   mixins: [transition(true)],
-
   props: {
     name: {
       type: String,
