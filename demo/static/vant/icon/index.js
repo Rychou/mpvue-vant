@@ -1,24 +1,19 @@
-Component({
-  options: {
-    addGlobalClass: true
-  },
-
-  externalClasses: ['custom-class'],
-
-  properties: {
+import { VantComponent } from '../common/component';
+VantComponent({
+  props: {
     info: null,
     name: String,
     size: String,
     color: String,
+    customStyle: String,
     classPrefix: {
       type: String,
       value: 'van-icon'
     }
   },
-
   methods: {
-    onClick() {
-      this.triggerEvent('click');
+    onClick: function onClick() {
+      this.$emit('click');
     }
   }
 });

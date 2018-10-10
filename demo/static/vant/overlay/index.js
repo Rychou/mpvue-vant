@@ -1,9 +1,6 @@
-Component({
-  options: {
-    addGlobalClass: true
-  },
-
-  properties: {
+import { VantComponent } from '../common/component';
+VantComponent({
+  props: {
     show: Boolean,
     mask: Boolean,
     customStyle: String,
@@ -12,10 +9,11 @@ Component({
       value: 1
     }
   },
-
   methods: {
-    onClick() {
-      this.triggerEvent('click');
-    }
+    onClick: function onClick() {
+      this.$emit('click');
+    },
+    // for prevent touchmove
+    noop: function noop() {}
   }
 });

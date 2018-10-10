@@ -1,34 +1,32 @@
-Component({
-  behaviors: ['wx://form-field'],
-
-  options: {
-    addGlobalClass: true
-  },
-
-  properties: {
+import { VantComponent } from '../common/component';
+VantComponent({
+  field: true,
+  props: {
     title: String,
     border: Boolean,
+    checked: Boolean,
     loading: Boolean,
     disabled: Boolean,
-    checked: {
-      type: Boolean,
-      observer(value) {
-        this.setData({ value });
-      }
-    },
     size: {
       type: String,
       value: '26px'
     }
   },
-
-  attached() {
-    this.setData({ value: this.data.checked });
+  watch: {
+    checked: function checked(value) {
+      this.setData({
+        value: value
+      });
+    }
   },
-
+  created: function created() {
+    this.setData({
+      value: this.data.checked
+    });
+  },
   methods: {
-    onChange(event) {
-      this.triggerEvent('change', event.detail);
+    onChange: function onChange(event) {
+      this.$emit('change', event.detail);
     }
   }
 });

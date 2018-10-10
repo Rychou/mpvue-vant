@@ -1,19 +1,7 @@
-Component({
-  externalClasses: [
-    'custom-class',
-    'title-class',
-    'label-class',
-    'value-class',
-    'left-icon-class',
-    'right-icon-class'
-  ],
-
-  options: {
-    multipleSlots: true,
-    addGlobalClass: true
-  },
-
-  properties: {
+import { VantComponent } from '../common/component';
+VantComponent({
+  classes: ['title-class', 'label-class', 'value-class'],
+  props: {
     title: null,
     value: null,
     url: String,
@@ -25,7 +13,6 @@ Component({
     clickable: Boolean,
     titleWidth: String,
     customStyle: String,
-    arrowDirection: String,
     linkType: {
       type: String,
       value: 'navigateTo'
@@ -35,14 +22,32 @@ Component({
       value: true
     }
   },
-
+  computed: {
+    cellClass: function cellClass() {
+      var data = this.data;
+      return this.classNames('custom-class', 'van-cell', {
+        'van-cell--center': data.center,
+        'van-cell--required': data.required,
+        'van-cell--borderless': !data.border,
+        'van-cell--clickable': data.isLink || data.clickable
+      });
+    },
+    titleStyle: function titleStyle() {
+      var titleWidth = this.data.titleWidth;
+      return titleWidth ? "max-width: " + titleWidth + ";min-width: " + titleWidth : '';
+    }
+  },
   methods: {
-    onClick() {
-      const { url } = this.data;
+    onClick: function onClick() {
+      var url = this.data.url;
+
       if (url) {
-        wx[this.data.linkType]({ url });
+        wx[this.data.linkType]({
+          url: url
+        });
       }
-      this.triggerEvent('click');
+
+      this.$emit('click');
     }
   }
 });

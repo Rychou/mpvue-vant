@@ -1,16 +1,15 @@
-Component({
-  options: {
-    addGlobalClass: true
-  },
-
-  externalClasses: [
-    'custom-class',
-    'overlay-class'
-  ],
-
-  properties: {
-    show: Boolean,
+import { VantComponent } from '../common/component';
+import { transition } from '../mixins/transition';
+VantComponent({
+  mixins: [transition(false)],
+  props: {
+    transition: String,
+    customStyle: String,
     overlayStyle: String,
+    zIndex: {
+      type: Number,
+      value: 100
+    },
     overlay: {
       type: Boolean,
       value: true
@@ -24,13 +23,12 @@ Component({
       value: 'center'
     }
   },
-
   methods: {
-    onClickOverlay() {
-      this.triggerEvent('click-overlay');
+    onClickOverlay: function onClickOverlay() {
+      this.$emit('click-overlay');
 
       if (this.data.closeOnClickOverlay) {
-        this.triggerEvent('close');
+        this.$emit('close');
       }
     }
   }

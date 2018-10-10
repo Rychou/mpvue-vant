@@ -1,33 +1,25 @@
-const BADGE_GROUP_PATH = '../badge-group/index';
-
-Component({
-  options: {
-    addGlobalClass: true
+import { VantComponent } from '../common/component';
+VantComponent({
+  relation: {
+    type: 'ancestor',
+    name: 'badge-group'
   },
-
-  externalClasses: ['custom-class'],
-
-  relations: {
-    [BADGE_GROUP_PATH]: {
-      type: 'ancestor'
-    }
-  },
-
-  properties: {
+  props: {
     info: Number,
     title: String
   },
-
   methods: {
-    onClick() {
-      const group = this.getRelationNodes(BADGE_GROUP_PATH)[0];
+    onClick: function onClick() {
+      var group = this.getRelationNodes('../badge-group/index')[0];
+
       if (group) {
         group.setActive(this);
       }
     },
-
-    setActive(active) {
-      this.setData({ active });
+    setActive: function setActive(active) {
+      this.setData({
+        active: active
+      });
     }
   }
 });

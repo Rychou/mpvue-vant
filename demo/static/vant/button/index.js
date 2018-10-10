@@ -1,83 +1,52 @@
-const buttonBehaviors = require('../behaviors/button');
-const classnames = require('../common/classnames');
-
-const observer = function () {
-  this.setClasses();
-};
-
-Component({
-  options: {
-    addGlobalClass: true
-  },
-
-  externalClasses: ['custom-class', 'loading-class'],
-
-  behaviors: [buttonBehaviors],
-
-  properties: {
+import { VantComponent } from '../common/component';
+import { button } from '../mixins/button';
+import { openType } from '../mixins/open-type';
+VantComponent({
+  classes: ['loading-class'],
+  mixins: [button, openType],
+  props: {
+    plain: Boolean,
+    block: Boolean,
+    round: Boolean,
+    square: Boolean,
+    loading: Boolean,
+    disabled: Boolean,
     type: {
       type: String,
-      value: 'default',
-      observer
+      value: 'default'
     },
     size: {
       type: String,
-      value: 'normal',
-      observer
-    },
-    plain: {
-      type: Boolean,
-      observer
-    },
-    disabled: {
-      type: Boolean,
-      observer
-    },
-    loading: {
-      type: Boolean,
-      observer
-    },
-    block: {
-      type: Boolean,
-      observer
-    },
-    square: {
-      type: Boolean,
-      observer
+      value: 'normal'
     }
   },
-
-  attached() {
-    this.setClasses();
-  },
-
-  methods: {
-    onClick() {
-      if (!this.data.disabled && !this.data.loading) {
-        this.triggerEvent('click');
-      }
-    },
-
-    setClasses() {
-      const {
-        type,
-        size,
-        plain,
-        disabled,
-        loading,
-        square,
-        block
-      } = this.data;
-      this.setData({
-        classes: classnames(`van-button--${type}`, `van-button--${size}`, {
-          'van-button--block': block,
-          'van-button--plain': plain,
-          'van-button--square': square,
-          'van-button--loading': loading,
-          'van-button--disabled': disabled,
-          'van-button--unclickable': disabled || loading
-        })
+  computed: {
+    classes: function classes() {
+      var _this$data = this.data,
+          type = _this$data.type,
+          size = _this$data.size,
+          block = _this$data.block,
+          plain = _this$data.plain,
+          round = _this$data.round,
+          square = _this$data.square,
+          loading = _this$data.loading,
+          disabled = _this$data.disabled;
+      return this.classNames("van-button--" + type, "van-button--" + size, {
+        'van-button--block': block,
+        'van-button--round': round,
+        'van-button--plain': plain,
+        'van-button--square': square,
+        'van-button--loading': loading,
+        'van-button--disabled': disabled,
+        'van-button--unclickable': disabled || loading
       });
+    }
+  },
+  methods: {
+    onClick: function onClick() {
+      if (!this.data.disabled && !this.data.loading) {
+        this.$emit('click');
+      }
     }
   }
 });

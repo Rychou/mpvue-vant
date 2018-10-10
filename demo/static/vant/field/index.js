@@ -1,16 +1,8 @@
-Component({
-  behaviors: ['wx://form-field'],
-
-  externalClasses: [
-    'input-class'
-  ],
-
-  options: {
-    multipleSlots: true,
-    addGlobalClass: true
-  },
-
-  properties: {
+import { VantComponent } from '../common/component';
+VantComponent({
+  field: true,
+  classes: ['input-class'],
+  props: {
     icon: String,
     label: String,
     error: Boolean,
@@ -24,7 +16,6 @@ Component({
     required: Boolean,
     iconClass: String,
     clearable: Boolean,
-    labelAlign: String,
     inputAlign: String,
     customClass: String,
     confirmType: String,
@@ -33,7 +24,7 @@ Component({
     customStyle: String,
     useIconSlot: Boolean,
     useButtonSlot: Boolean,
-    placeholderClass: String,
+    placeholderStyle: String,
     cursorSpacing: {
       type: Number,
       value: 50
@@ -41,10 +32,6 @@ Component({
     maxlength: {
       type: Number,
       value: -1
-    },
-    value: {
-      type: null,
-      value: ''
     },
     type: {
       type: String,
@@ -55,78 +42,71 @@ Component({
       value: true
     },
     titleWidth: {
-      type: Number,
-      value: 90
+      type: String,
+      value: '90px'
     }
   },
-
   data: {
-    focused: false,
     showClear: false
   },
-
+  computed: {
+    inputClass: function inputClass() {
+      var data = this.data;
+      return this.classNames('input-class', 'van-field__input', {
+        'van-field--error': data.error,
+        'van-field__textarea': data.type === 'textarea',
+        'van-field__input--disabled': data.disabled,
+        ["van-field--" + data.inputAlign]: data.inputAlign
+      });
+    }
+  },
+  beforeCreate: function beforeCreate() {
+    this.focused = false;
+  },
   methods: {
-    onInput(event) {
-      const {
-        value = ''
-      } = event.detail || {};
-      this.triggerEvent('input', value);
-      this.triggerEvent('change', value);
+    onInput: function onInput(event) {
+      var _ref = event.detail || {},
+          _ref$value = _ref.value,
+          value = _ref$value === void 0 ? '' : _ref$value;
+
+      this.$emit('input', value);
+      this.$emit('change', value);
       this.setData({
-        value,
-        showClear: this.getShowClear({
-          value
-        })
+        value: value,
+        showClear: this.getShowClear(value)
       });
     },
-
-    onFocus(event) {
-      this.triggerEvent('focus', event);
+    onFocus: function onFocus() {
+      this.$emit('focus');
+      this.focused = true;
       this.setData({
-        focused: true,
-        showClear: this.getShowClear({
-          focused: true
-        })
+        showClear: this.getShowClear()
       });
     },
-
-    onBlur(event) {
+    onBlur: function onBlur() {
       this.focused = false;
-      this.triggerEvent('blur', event);
+      this.$emit('blur');
       this.setData({
-        focused: false,
-        showClear: this.getShowClear({
-          focused: false
-        })
+        showClear: this.getShowClear()
       });
     },
-
-    onClickIcon() {
-      this.triggerEvent('clickIcon');
+    onClickIcon: function onClickIcon() {
+      this.$emit('click-icon');
     },
-
-    getShowClear(options) {
-      const {
-        focused = this.data.focused,
-          value = this.data.value
-      } = options;
-
-      return this.data.clearable && focused && value !== '' && !this.data.readonly;
+    getShowClear: function getShowClear(value) {
+      value = value === undefined ? this.data.value : value;
+      return this.data.clearable && this.focused && value && !this.data.readonly;
     },
-
-    onClear() {
+    onClear: function onClear() {
       this.setData({
         value: '',
-        showClear: this.getShowClear({
-          value: ''
-        })
+        showClear: this.getShowClear('')
       });
-      this.triggerEvent('input', '');
-      this.triggerEvent('change', '');
+      this.$emit('input', '');
+      this.$emit('change', '');
     },
-
-    onConfirm() {
-      this.triggerEvent('confirm', this.data.value);
+    onConfirm: function onConfirm() {
+      this.$emit('confirm', this.data.value);
     }
   }
 });

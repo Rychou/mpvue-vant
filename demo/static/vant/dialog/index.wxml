@@ -1,0 +1,50 @@
+<van-popup
+  show="{{ show }}"
+  transition="scale"
+  z-index="{{ zIndex }}"
+  overlay="{{ overlay }}"
+  close-on-click-overlay="{{ closeOnClickOverlay }}"
+  custom-class="van-dialog"
+  bind:close="onClickOverlay"
+>
+  <view wx:if="{{ title }}" class="van-dialog__header {{ !message && !useSlot ? 'van-dialog--isolated' : '' }}">
+    {{ title }}
+  </view>
+  <view class="van-dialog__content" wx:if="{{ message || useSlot }}">
+    <slot wx:if="{{ useSlot }}" />
+    <view wx:elif="{{ message }}" class="van-dialog__message {{ title ? 'van-dialog__message--has-title' : '' }}">
+      {{ message }}
+    </view>
+  </view>
+  <view class="van-hairline--top van-dialog__footer {{ showCancelButton && showConfirmButton ? 'van-dialog__footer--buttons' : '' }}">
+    <view wx:if="{{ showCancelButton }}" class="van-dialog__button">
+      <van-button
+        loading="{{ loading.cancel }}"
+        size="large"
+        custom-class="van-dialog__cancel"
+        bind:click="onCancel"
+      >
+        {{ cancelButtonText }}
+      </van-button>
+    </view>
+    <view
+      wx:if="{{ showConfirmButton }}"
+      class="van-dialog__button {{ showCancelButton ? 'van-hairline--left' : '' }}"
+    >
+      <van-button
+        size="large"
+        loading="{{ loading.confirm }}"
+        custom-class="van-dialog__confirm"
+        open-type="{{ confirmButtonOpenType }}"
+        bind:click="onConfirm"
+        bindcontact="bindContact"
+        bindgetuserinfo="bindGetUserInfo"
+        bindgetphonenumber="bindGetPhoneNumber"
+        binderror="bindError"
+        bindopensetting="bindOpenSetting"
+      >
+        {{ confirmButtonText }}
+      </van-button>
+    </view>
+  </view>
+</van-popup>

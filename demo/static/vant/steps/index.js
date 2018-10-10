@@ -1,26 +1,9 @@
-Component({
-  options: {
-    addGlobalClass: true
-  },
-
-  externalClasses: [
-    'custom-class'
-  ],
-
-  properties: {
+import { VantComponent } from '../common/component';
+VantComponent({
+  props: {
     icon: String,
-    steps: {
-      type: Array,
-      observer() {
-        this.formatSteps();
-      }
-    },
-    active: {
-      type: Number,
-      observer() {
-        this.formatSteps();
-      }
-    },
+    steps: Array,
+    active: Number,
     direction: {
       type: String,
       value: 'horizontal'
@@ -30,28 +13,27 @@ Component({
       value: '#06bf04'
     }
   },
-
-  attached() {
+  watch: {
+    steps: 'formatSteps',
+    active: 'formatSteps'
+  },
+  created: function created() {
     this.formatSteps();
   },
-
   methods: {
-    formatSteps() {
-      const { steps } = this.data;
-      const formattedSteps = steps.map((step, index) => {
-        return {
-          ...step,
-          status: this.getStatus(index)
-        };
-      });
+    formatSteps: function formatSteps() {
+      var _this = this;
 
+      var steps = this.data.steps;
+      steps.forEach(function (step, index) {
+        step.status = _this.getStatus(index);
+      });
       this.setData({
-        formattedSteps
+        steps: steps
       });
     },
-
-    getStatus(index) {
-      const { active } = this.data;
+    getStatus: function getStatus(index) {
+      var active = this.data.active;
 
       if (index < active) {
         return 'finish';

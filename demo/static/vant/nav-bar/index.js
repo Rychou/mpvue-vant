@@ -1,15 +1,7 @@
-Component({
-  externalClasses: [
-    'custom-class',
-    'title-class'
-  ],
-
-  options: {
-    multipleSlots: true,
-    addGlobalClass: true
-  },
-
-  properties: {
+import { VantComponent } from '../common/component';
+VantComponent({
+  classes: ['title-class'],
+  props: {
     title: String,
     leftText: String,
     rightText: String,
@@ -20,14 +12,12 @@ Component({
       value: 1
     }
   },
-
   methods: {
-    onClickLeft() {
-      this.triggerEvent('click-left');
+    onClickLeft: function onClickLeft() {
+      this.$emit('click-left');
     },
-
-    onClickRight() {
-      this.triggerEvent('click-right');
+    onClickRight: function onClickRight() {
+      this.$emit('click-right');
     }
   }
 });

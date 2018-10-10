@@ -1,11 +1,6 @@
-Component({
-  options: {
-    addGlobalClass: true
-  },
-
-  externalClasses: ['custom-class'],
-
-  properties: {
+import { VantComponent } from '../common/component';
+VantComponent({
+  props: {
     size: {
       type: String,
       value: '30px'
