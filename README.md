@@ -166,7 +166,7 @@ VM54:1 thirdScriptError sdk uncaught third Error module "static/vant/notify/inde
 
 # 分享一个 Demo
 
-作者基于 vant 和 wux 组件库开发的一个小程序
+作者基于 vant 和 wux 组件库,以及最新的小程序云开发开发的一个小程序
 
 猫叫助手|收录各种猫叫声，帮助与猫咪交流，分享一些养猫的小知识等。
 
