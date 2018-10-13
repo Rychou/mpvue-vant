@@ -9,44 +9,21 @@
 
 # 二、使用方法
 
-## 克隆仓库
+> 目前vant已经支持了`npm`的方式，但是由于`node_modules`目录下的代码是不会被编进`dist`目录下的，所以暂时只能用`git`方式使用。
 
-> 注意：由于一些 BUG 我修改了源代码，所以请克隆本仓库代码。
+## 克隆vant仓库
+
+将`dist`目录下的所有文件复制到你项目的`/static/vant/`目录下。
 
 ```
+git clone https://github.com/youzan/vant-weapp.git
+```
+
+```
+// 当然你也可以克隆本仓库代码，本仓库会与`vant`仓库保持同步。直接将`vant`目录复制到`/static`目录下
 git clone https://github.com/xxxsimons/mpvue-vant.git
 ```
 
-**将仓库中的 vant 文件夹复制到你的项目目录 static 下**
-
-## 配置 webpack 为 vant 支持 ES6
-
-> 请记得打开微信开发者工具中的 ES6 转 ES5 功能
-
-```
-// build/webpack.base.conf.js 的babel-loader中
-      {
-        test: /\.js$/,
-        include: [resolve('src'), resolve('test'), resolve('static/vant')], // 添加vant文件目录
-        use: [
-          'babel-loader',
-          {
-            loader: 'mpvue-loader',
-            options: {
-              checkMPEntry: true
-            }
-          },
-        ]
-      },
-```
-
-## 配置 eslint，忽略 vant 目录检查
-
-```
-// 根目录.eslintignore文件
-
-static/vant/*/*.js //添加这一行
-```
 
 ## 引入
 
@@ -72,7 +49,7 @@ static/vant/*/*.js //添加这一行
 
 ## 1. 使用方式
 
-mpvue 和原生小程序的方式有所不同。
+mpvue 和原生小程序的方式有所不同。可以参考[mpvue文档](http://mpvue.com/)
 
 ### 1.1 数据绑定
 
@@ -144,6 +121,15 @@ this.$emit('clickIcon');
 
 ### 2.2 报错
 
+一般的报错报错都可以通过一下流程处理。
+
+- 是否打开了微信开发者工具中的`ES6转ES5`功能。
+- 仔细检查代码和比对文档，看看是否有使用不当的地方。
+- 重新编译`npm run dev`或删掉`dist`目录重新`npm run dev`
+- 重启或更新微信开发者工具。
+
+若以上流程都走完了，还是无法解决报错，可以通过提交`issues`的方式，我来帮你解决。
+
 #### 2.2.1 引入组件报错
 
 ```
@@ -166,7 +152,7 @@ VM54:1 thirdScriptError sdk uncaught third Error module "static/vant/notify/inde
 
 # 分享一个 Demo
 
-作者基于 vant 和 wux 组件库,以及最新的小程序云开发开发的一个小程序
+作者基于 vant 和 wux 组件库,以及最新的小程序云开发开发的一个小程序。以及总结了`mpvue`中使用云开发的注意事项，[mpvue-cloud](https://github.com/xxxsimons/mpvue-cloud)
 
 猫叫助手|收录各种猫叫声，帮助与猫咪交流，分享一些养猫的小知识等。
 
