@@ -58,7 +58,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        include: [resolve('src'), resolve('test'),resolve('static/vant')],
+        include: [resolve('src'), resolve('test')],
         use: [
           'babel-loader',
           {

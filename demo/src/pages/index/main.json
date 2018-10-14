@@ -4,7 +4,8 @@
     "van-notify": "/static/vant/notify/index",
     "van-tabs": "/static/vant/tabs/index",
     "van-tab": "/static/vant/tab/index",
-    "van-steps": "/static/vant/steps/index"
-
+    "van-steps": "/static/vant/steps/index",
+    "van-toast": "/static/vant/toast/index",
+    "van-action-sheet": "/static/vant/action-sheet/index"
   }
 }

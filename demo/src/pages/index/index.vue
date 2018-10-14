@@ -2,37 +2,55 @@
   <div>
     <!-- 组件在main.json中引入 -->
     <!-- <van-button @click="onClick">按钮</van-button>
-    <van-notify id="van-notify" /> -->
-    <van-button type="primary">
-      测试
-    </van-button>
-    <van-tabs color="#d5b069"
-              :active="activeTab"
-              :line-width="48"
-              @change="onTabChange">
-      <van-tab title="待付款">待付款</van-tab>
-      <van-tab title="待发货">待发货</van-tab>
-      <van-tab title="已完成">已完成</van-tab>
-    </van-tabs>
+    <van-notify id="van-notify" />-->
+
+    <van-button type="primary"
+                @click="onClick">测试</van-button>
+    <van-action-sheet :show="show"
+                      :actions="actions"
+                      @close="onClose"
+                      @select="onSelect" />
   </div>
 </template>
 
 <script>
 // 这个是唤起Notify的函数，参照[Vant 文档](https://youzan.github.io/vant-weapp/#/notify)
 import Notify from '@/../static/vant/notify/notify'
-
+import Toast from '@/../static/vant/toast/toast'
 export default {
+
   data () {
     return {
-      activeTab: 1
+      actions: [
+        {
+          name: '选项'
+        },
+        {
+          name: '分享',
+          subname: '描述信息',
+          openType: 'share'
+        },
+        {
+          loading: true
+        },
+        {
+          name: '禁用选项',
+          disabled: true
+        }
+      ],
+      show: false
     }
   },
   methods: {
-    onTabChange (e) {
-      console.log(e)
-    },
     onClick () {
-      Notify("通知消息！")
+      this.show = true
+    },
+    onClose () {
+      this.show = false
+    },
+
+    onSelect (event) {
+      console.log(event.detail);
     }
   }
 }
