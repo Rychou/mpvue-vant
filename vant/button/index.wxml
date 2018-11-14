@@ -1,29 +1,26 @@
 <button
-  class="custom-class van-button {{ classes }}"
   id="{{ id }}"
-  open-type="{{ openType }}"
-  app-parameter="{{ appParameter }}"
-  hover-stop-propagation="{{ hoverStopPropagation }}"
-  hover-start-time="{{ hoverStartTime }}"
-  hover-stay-time="{{ hoverStayTime }}"
   lang="{{ lang }}"
+  class="{{ classes }}"
+  open-type="{{ openType }}"
   session-from="{{ sessionFrom }}"
-  send-message-title="{{ sendMessageTitle }}"
-  send-message-path="{{ sendMessagePath }}"
+  app-parameter="{{ appParameter }}"
   send-message-img="{{ sendMessageImg }}"
+  send-message-path="{{ sendMessagePath }}"
   show-message-card="{{ showMessageCard }}"
+  send-message-title="{{ sendMessageTitle }}"
   bind:tap="onClick"
+  binderror="bindError"
   bindcontact="bindContact"
+  bindopensetting="bindOpenSetting"
   bindgetuserinfo="bindGetUserInfo"
   bindgetphonenumber="bindGetPhoneNumber"
-  binderror="bindError"
-  bindopensetting="bindOpenSetting"
 >
   <van-loading
     wx:if="{{ loading }}"
     size="20px"
     custom-class="loading-class"
-    color="{{ type === 'default' ? '#c9c9c9' : '#fff' }}"
+    color="{{ type === 'default' ? '#c9c9c9' : '' }}"
   />
-  <slot wx:else></slot>
+  <slot wx:else />
 </button>

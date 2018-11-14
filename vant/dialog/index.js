@@ -9,6 +9,7 @@ VantComponent({
     useSlot: Boolean,
     asyncClose: Boolean,
     showCancelButton: Boolean,
+    closeOnClickOverlay: Boolean,
     confirmButtonOpenType: String,
     zIndex: {
       type: Number,
@@ -29,10 +30,6 @@ VantComponent({
     overlay: {
       type: Boolean,
       value: true
-    },
-    closeOnClickOverlay: {
-      type: Boolean,
-      value: false
     }
   },
   data: {
@@ -43,14 +40,7 @@ VantComponent({
   },
   watch: {
     show: function show(_show) {
-      if (!_show) {
-        this.setData({
-          loading: {
-            confirm: false,
-            cancel: false
-          }
-        });
-      }
+      !_show && this.stopLoading();
     }
   },
   methods: {
@@ -75,6 +65,14 @@ VantComponent({
     close: function close() {
       this.setData({
         show: false
+      });
+    },
+    stopLoading: function stopLoading() {
+      this.setData({
+        loading: {
+          confirm: false,
+          cancel: false
+        }
       });
     },
     onClose: function onClose(action) {

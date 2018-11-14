@@ -42,7 +42,7 @@ VantComponent({
     },
     zIndex: {
       type: Number,
-      value: 99
+      value: 1
     },
     swipeThreshold: {
       type: Number,
@@ -139,8 +139,11 @@ VantComponent({
           item.instance.setData(data);
         }
       });
-      this.setLine();
-      this.scrollIntoView();
+      this.setData({}, function () {
+        _this2.setLine();
+
+        _this2.scrollIntoView();
+      });
     },
     // scroll active tab into view
     scrollIntoView: function scrollIntoView() {

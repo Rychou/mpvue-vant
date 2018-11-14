@@ -20,7 +20,7 @@
       maxlength="{{ maxlength }}"
       auto-height="{{ autosize }}"
       placeholder="{{ placeholder }}"
-      placeholder-style="{{ placeholderStyle }} "
+      placeholder-style="{{ placeholderStyle }}"
       placeholder-class="{{ error ? 'van-field--error' : '' }}"
       cursor-spacing="{{ cursorSpacing }}"
       bindinput="onInput"
@@ -37,7 +37,7 @@
       disabled="{{ disabled || readonly }}"
       maxlength="{{ maxlength }}"
       placeholder="{{ placeholder }}"
-      placeholder-style="{{ placeholderStyle }} "
+      placeholder-style="{{ placeholderStyle }}"
       placeholder-class="{{ error ? 'van-field--error' : '' }}"
       confirm-type="{{ confirmType }}"
       cursor-spacing="{{ cursorSpacing }}"
@@ -48,6 +48,7 @@
     />
     <van-icon
       wx:if="{{ showClear }}"
+      size="16px"
       name="clear"
       class="van-field__clear-root"
       custom-class="van-field__clear"
@@ -56,6 +57,7 @@
     <view class="van-field__icon-container" wx:if="{{ icon || useIconSlot }}" bind:tap="onClickIcon">
       <van-icon
         wx:if="{{ icon }}"
+        size="16px"
         name="{{ icon }}"
         custom-class="van-field__icon {{ iconClass }}"
       />

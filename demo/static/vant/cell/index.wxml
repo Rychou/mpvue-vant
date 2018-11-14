@@ -1,11 +1,12 @@
 <view
-  class="{{ cellClass }}"  
+  class="{{ cellClass }}"
   style="{{ customStyle }}"
   bind:tap="onClick"
 >
   <van-icon
     wx:if="{{ icon }}"
     name="{{ icon }}"
+    class="van-cell__left-icon-wrap"
     custom-class="van-cell__left-icon"
   />
   <slot wx:else name="icon" />
@@ -22,13 +23,14 @@
   </view>
 
   <view class="van-cell__value value-class">
-    <view wx:if="{{ value }}">{{ value }}</view>
+    <block wx:if="{{ value || value === 0 }}">{{ value }}</block>
     <slot wx:else />
   </view>
 
   <van-icon
     wx:if="{{ isLink }}"
     name="arrow"
+    class="{{ iconWrapClass }}"
     custom-class="van-cell__right-icon"
   />
   <slot wx:else name="right-icon" />

@@ -6,10 +6,17 @@
 
     <van-button type="primary"
                 @click="onClick">测试</van-button>
-    <van-action-sheet :show="show"
+    <van-icon name="success" />
+    <!-- <van-action-sheet :show="show"
                       :actions="actions"
                       @close="onClose"
-                      @select="onSelect" />
+    @select="onSelect" />-->
+    <van-popup :show="show"
+               :close-on-click-overlay="true"
+               overlay-style="background:red"
+               position="top"
+               :overlay="true"
+               @close="onClose">内容</van-popup>
   </div>
 </template>
 
@@ -18,7 +25,6 @@
 import Notify from '@/../static/vant/notify/notify'
 import Toast from '@/../static/vant/toast/toast'
 export default {
-
   data () {
     return {
       actions: [
@@ -50,7 +56,7 @@ export default {
     },
 
     onSelect (event) {
-      console.log(event.detail);
+      console.log(event.detail)
     }
   }
 }
