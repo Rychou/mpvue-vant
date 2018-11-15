@@ -9,9 +9,9 @@
 
 # 二、使用方法
 
-> 目前vant已经支持了`npm`的方式，但是由于`node_modules`目录下的代码是不会被编进`dist`目录下的，所以暂时只能用`git`方式使用。
+> 目前 vant 已经支持了`npm`的方式，但是由于`node_modules`目录下的代码是不会被编进`dist`目录下的，所以暂时只能用`git`方式使用。
 
-## 克隆vant仓库
+## 克隆 vant 仓库
 
 将`dist`目录下的所有文件复制到你项目的`/static/vant/`目录下。
 
@@ -21,9 +21,8 @@ git clone https://github.com/youzan/vant-weapp.git
 
 ```
 // 当然你也可以克隆本仓库代码，本仓库会与`vant`仓库保持同步。直接将`vant`目录复制到`/static`目录下
-git clone https://github.com/xxxsimons/mpvue-vant.git
+git clone https://github.com/Rychou/mpvue-vant.git
 ```
-
 
 ## 引入
 
@@ -49,7 +48,7 @@ git clone https://github.com/xxxsimons/mpvue-vant.git
 
 ## 1. 使用方式
 
-mpvue 和原生小程序的方式有所不同。可以参考[mpvue文档](http://mpvue.com/)
+mpvue 和原生小程序的方式有所不同。可以参考[mpvue 文档](http://mpvue.com/)
 
 ### 1.1 数据绑定
 
@@ -136,7 +135,7 @@ this.$emit('clickIcon');
 VM54:1 thirdScriptError sdk uncaught third Error module "static/vant/notify/index.js" is not defined
 ```
 
-解决办法是：打开小程序开发者工具中的**ES6 转 ES5**功能. [issues/#5](https://github.com/xxxsimons/mpvue-vant/issues/5#issuecomment-419620351)
+解决办法是：打开小程序开发者工具中的**ES6 转 ES5**功能. [issues/#5](https://github.com/Rychou/mpvue-vant/issues/5#issuecomment-419620351)
 
 # 3. 其他组件库
 
@@ -148,11 +147,11 @@ VM54:1 thirdScriptError sdk uncaught third Error module "static/vant/notify/inde
 
 使用方法上，几乎没有差异。值得注意的是，大家复制源代码到自己项目上时，应该复制`/dist/`目录下的文件。因为这里是经过编译后的。
 
-如果大家使用过程中遇到什么 BUG，可以通过提[issues](https://github.com/xxxsimons/mpvue-vant/issues)的方式让我知道，大家一起踩坑吧！
+如果大家使用过程中遇到什么 BUG，可以通过提[issues](https://github.com/Rychou/mpvue-vant/issues)的方式让我知道，大家一起踩坑吧！
 
 # 分享一个 Demo
 
-作者基于 vant 和 wux 组件库,以及最新的小程序云开发开发的一个小程序。以及总结了`mpvue`中使用云开发的注意事项，[mpvue-cloud](https://github.com/xxxsimons/mpvue-cloud)
+作者基于 vant 和 wux 组件库,以及最新的小程序云开发开发的一个小程序。以及总结了`mpvue`中使用云开发的注意事项，[mpvue-cloud](https://github.com/Rychou/mpvue-cloud)
 
 猫叫助手|收录各种猫叫声，帮助与猫咪交流，分享一些养猫的小知识等。
 
