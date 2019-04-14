@@ -149,10 +149,20 @@ VM54:1 thirdScriptError sdk uncaught third Error module "static/vant/notify/inde
 
 如果大家使用过程中遇到什么 BUG，可以通过提[issues](https://github.com/Rychou/mpvue-vant/issues)的方式让我知道，大家一起踩坑吧！
 
-# 分享一个 Demo
+# 分享两个小程序
 
-作者基于 vant 和 wux 组件库,以及最新的小程序云开发开发的一个小程序。以及总结了`mpvue`中使用云开发的注意事项，[mpvue-cloud](https://github.com/Rychou/mpvue-cloud)
+## 一、猫叫助手
 
-猫叫助手|收录各种猫叫声，帮助与猫咪交流，分享一些养猫的小知识等。
+基于 vant 和 wux 组件库,以及小程序云开发开发的一个小程序。以及总结了`mpvue`中使用云开发的注意事项，[mpvue-cloud](https://github.com/Rychou/mpvue-cloud)
 
-![mmexport1539139436955.jpg](https://i.loli.net/2018/10/10/5bbda0a989d9e.jpg)
+收录各种猫叫声，帮助与猫咪交流，分享一些养猫的小知识等。
+
+![猫叫助手](https://ws3.sinaimg.cn/large/005BYqpgly1g22ii40s6kj325s0m8tcq.jpg)
+
+## 二、在书云
+
+这是我近期使用`Taro`开发框架开发的一款小程序，主要功能是提供可靠的`书架管理`功能，只需要扫一扫书籍背后的条形码即可添加书籍入库，你可以方便的在线上管理你的书架，查看书籍的基本信息，亦可以添加书评。
+
+该项目获得了[微信小程序 U 计划](https://edu.weixin.qq.com/cgi-bin/newreadtemplate?t=edu_portal/zh-hans/apply/apply-u-plan/index)的资助。目前项目正在开发中，欢迎大家体验反馈。
+
+![在书云](https://ws3.sinaimg.cn/large/005BYqpgly1g22igfh59bj325s0m8wig.jpg)
