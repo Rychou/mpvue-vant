@@ -13,7 +13,7 @@
 
 > 以下两种方式没有本质区别，都是要将组件库复制到 `static` 目录下。
 
-#### npm 安装
+**npm 安装**
 
 在根目录下，命令行执行：
 
@@ -23,7 +23,7 @@ npm i vant-weapp -S --production
 
 安装完后，将 `node_modules/vant-weapp/dist` 目录下的所有文件，copy 至 `static/vant` 目录下。
 
-#### 克隆仓库
+**克隆仓库**
 
 在本地找个位置（非项目目录），在命令行执行以下命令：
 
@@ -46,6 +46,8 @@ git clone https://github.com/youzan/vant-weapp.git
 ```
 
 ### 组件使用
+
+直接在页面的 `.vue` 文件中使用即可。
 
 ```html
 <van-button>测试</van-button>
